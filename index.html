@@ -342,6 +342,30 @@
         document.getElementById('contact-icon').addEventListener('dblclick', () => {
             document.getElementById('contact-window').style.display = 'block';
         });
+// Window dragging functionality
+document.querySelectorAll('.window-header').forEach(header => {
+    header.addEventListener('mousedown', dragWindow);
+});
+
+// Window controls (minimize, maximize, close)
+document.querySelectorAll('.minimize').forEach(button => { ... });
+document.querySelectorAll('.maximize').forEach(button => { ... });
+document.querySelectorAll('.close').forEach(button => { ... });
+
+// Shut Down Button: Close all open windows
+document.querySelector('.shutdown-button').addEventListener('click', () => {
+    const openWindows = document.querySelectorAll('.window:not([style*="display: none"])');
+    openWindows.forEach(window => {
+        window.style.display = 'none';
+    });
+    alert('All windows closed! 🖥️💥');
+});
+
+// Start menu toggle
+document.querySelector('.start-button').addEventListener('click', () => { ... });
+
+// Close start menu when clicking elsewhere
+document.addEventListener('click', (e) => { ... });
 
         // Start menu toggle
         document.querySelector('.start-button').addEventListener('click', () => {

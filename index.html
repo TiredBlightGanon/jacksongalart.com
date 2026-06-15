@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jackson Taylor's Retro Portfolio</title>
+    <style>
+        /* Reset and Base Styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'MS Sans Serif', Arial, sans-serif;
+            background: #008080;
+            color: #000;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        /* Taskbar */
+        .taskbar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 30px;
+            background: #c0c0c0;
+            display: flex;
+            align-items: center;
+            border-top: 2px solid #ffffff;
+            z-index: 1000;
+        }
+
+        .start-button {
+            background: #c0c0c0;
+            border: 2px solid;
+            border-color: #ffffff #808080 #808080 #ffffff;
+            padding: 0 10px;
+            margin-left: 5px;
+            font-family: 'MS Sans Serif', Arial, sans-serif;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        .start-menu-content {
+            display: none;
+            position: absolute;
+            bottom: 30px;
+            left: 0;
+            background: #c0c0c0;
+            border: 2px solid;
+            border-color: #ffffff #808080 #808080 #ffffff;
+            width: 200px;
+            padding: 5px;
+        }
+
+        .start-menu:hover .start-menu-content {
+            display: block;
+        }
+
+        .menu-item {
+            padding: 5px;
+            cursor: pointer;
+        }
+
+        .menu-item:hover {
+            background: #000080;
+            color: white;
+        }
+
+        .taskbar-icons {
+            display: flex;
+            margin-left: 10px;
+            gap: 10px;
+        }
+
+        .icon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: #008080;
+            color: white;
+            width: 80px;
+            padding: 5px;
+            font-size: 12px;
+            text-align: center;
+            cursor: pointer;
+            border: 2px solid;
+            border-color: #ffffff #808080 #808080 #ffffff;
+        }
+
+        .icon img {
+            margin-bottom: 5px;
+        }
+
+        .clock {
+            margin-left: auto;
+            margin-right: 10px;
+            font-size: 12px;
+        }
+
+        /* Desktop */
+        .desktop {
+            padding-top: 20px;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        /* Window Styles */
+        .window {
+            position: absolute;
+            width: 400px;
+            background: #c0c0c0;
+            border: 2px solid;
+            border-color: #ffffff #808080 #808080 #ffffff;
+            box-shadow: 3px 3px 0px #000;
+            display: none;
+            z-index: 100;
+        }
+
+        .window-header {
+            background: #000080;
+            color: white;
+            padding: 3px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+        }
+
+        .window-title {
+            margin-left: 5px;
+        }
+
+        .window-controls button {
+            background: #c0c0c0;
+            border: 1px solid;
+            border-color: #ffffff #808080 #808080 #ffffff;
+            margin: 0 2px;
+            font-size: 10px;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .window-content {
+            padding: 10px;
+            font-size: 12px;
+        }
+
+        .window-button {
+            background: #c0c0c0;
+            border: 2px solid;
+            border-color: #ffffff #808080 #808080 #ffffff;
+            padding: 5px 10px;
+            margin-top: 10px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        /* Portfolio Content */
+        .portfolio-item {
+            margin-bottom: 10px;
+        }
+
+        .portfolio-item h3 {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+
+        .portfolio-item p {
+            margin: 5px 0;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Taskbar -->
+    <div class="taskbar">
+        <div class="start-menu">
+            <button class="start-button">Start</button>
+            <div class="start-menu-content">
+                <div class="menu-item">Programs</div>
+                <div class="menu-item">Documents</div>
+                <div class="menu-item">Settings</div>
+                <div class="menu-item">Shut Down</div>
+            </div>
+        </div>
+        <div class="taskbar-icons">
+            <div class="icon">
+                <img src="https://via.placeholder.com/32" alt="My Computer">
+                <span>My Computer</span>
+            </div>
+            <div class="icon">
+                <img src="https://via.placeholder.com/32" alt="Portfolio">
+                <span>Portfolio</span>
+            </div>
+            <div class="icon">
+                <img src="https://via.placeholder.com/32" alt="About Me">
+                <span>About Me</span>
+            </div>
+        </div>
+        <div class="clock">12:00 PM</div>
+    </div>
+
+    <!-- Desktop Icons -->
+    <div class="desktop">
+        <div class="icon" id="projects-icon">
+            <img src="https://via.placeholder.com/32" alt="Projects">
+            <span>My Projects</span>
+        </div>
+        <div class="icon" id="about-icon">
+            <img src="https://via.placeholder.com/32" alt="About">
+            <span>About Me</span>
+        </div>
+        <div class="icon" id="contact-icon">
+            <img src="https://via.placeholder.com/32" alt="Contact">
+            <span>Contact</span>
+        </div>
+    </div>
+
+    <!-- Projects Window -->
+    <div class="window" id="projects-window">
+        <div class="window-header">
+            <span class="window-title">My Projects</span>
+            <div class="window-controls">
+                <button class="minimize">_</button>
+                <button class="maximize">□</button>
+                <button class="close">X</button>
+            </div>
+        </div>
+        <div class="window-content">
+            <div class="portfolio-item">
+                <h3>Retro Portfolio</h3>
+                <p>A desktop-style portfolio website built with HTML, CSS, and JavaScript.</p>
+                <button class="window-button" onclick="alert('Link to project!')">View Project</button>
+            </div>
+            <div class="portfolio-item">
+                <h3>Web Design</h3>
+                <p>Custom website designs for clients.</p>
+                <button class="window-button" onclick="alert('Link to project!')">View Project</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Me Window -->
+    <div class="window" id="about-window">
+        <div class="window-header">
+            <span class="window-title">About Me</span>
+            <div class="window-controls">
+                <button class="minimize">_</button>
+                <button class="maximize">□</button>
+                <button class="close">X</button>
+            </div>
+        </div>
+        <div class="window-content">
+            <p>Hello! I'm Jackson Taylor, a web developer passionate about retro tech and modern design.</p>
+            <p>This portfolio is inspired by the classic Windows 95/98 desktop environment.</p>
+        </div>
+    </div>
+
+    <!-- Contact Window -->
+    <div class="window" id="contact-window">
+        <div class="window-header">
+            <span class="window-title">Contact</span>
+            <div class="window-controls">
+                <button class="minimize">_</button>
+                <button class="maximize">□</button>
+                <button class="close">X</button>
+            </div>
+        </div>
+        <div class="window-content">
+            <p>Email: jacksontaylorartist@gmail.com</p>
+            <p>GitHub: <a href="https://github.com/TiredBlightGanon" target="_blank">TiredBlightGanon</a></p>
+        </div>
+    </div>
+
+    <!-- JavaScript for Interactivity -->
+    <script>
+        // Window dragging functionality
+        document.querySelectorAll('.window-header').forEach(header => {
+            header.addEventListener('mousedown', dragWindow);
+        });
+
+        function dragWindow(e) {
+            const window = e.target.closest('.window');
+            const offsetX = e.clientX - window.getBoundingClientRect().left;
+            const offsetY = e.clientY - window.getBoundingClientRect().top;
+
+            function moveWindow(e) {
+                window.style.top = (e.clientY - offsetY) + 'px';
+                window.style.left = (e.clientX - offsetX) + 'px';
+            }
+
+            function stopMoving() {
+                document.removeEventListener('mousemove', moveWindow);
+                document.removeEventListener('mouseup', stopMoving);
+            }
+
+            document.addEventListener('mousemove', moveWindow);
+            document.addEventListener('mouseup', stopMoving);
+        }
+
+        // Window controls
+        document.querySelectorAll('.minimize').forEach(button => {
+            button.addEventListener('click', () => {
+                const window = button.closest('.window');
+                window.style.display = 'none';
+            });
+        });
+
+        document.querySelectorAll('.maximize').forEach(button => {
+            button.addEventListener('click', () => {
+                const window = button.closest('.window');
+                if (window.style.width === '400px') {
+                    window.style.width = '80%';
+                    window.style.height = '80%';
+                } else {
+                    window.style.width = '400px';
+                    window.style.height = 'auto';
+                }
+            });
+        });
+
+        document.querySelectorAll('.close').forEach(button => {
+            button.addEventListener('click', () => {
+                const window = button.closest('.window');
+                window.style.display = 'none';
+            });
+        });
+
+        // Open windows from desktop icons
+        document.getElementById('projects-icon').addEventListener('dblclick', () => {
+            document.getElementById('projects-window').style.display = 'block';
+        });
+
+        document.getElementById('about-icon').addEventListener('dblclick', () => {
+            document.getElementById('about-window').style.display = 'block';
+        });
+
+        document.getElementById('contact-icon').addEventListener('dblclick', () => {
+            document.getElementById('contact-window').style.display = 'block';
+        });
+
+        // Start menu toggle
+        document.querySelector('.start-button').addEventListener('click', () => {
+            const menu = document.querySelector('.start-menu-content');
+            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+        });
+
+        // Close start menu when clicking elsewhere
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.start-menu')) {
+                document.querySelector('.start-menu-content').style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
